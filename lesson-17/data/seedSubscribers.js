@@ -5,11 +5,15 @@
  * Listing 15.9 (p. 224)
  */
 const mongoose = require("mongoose"),
-  Subscriber = require("../models/subscriber");
+  Subscriber = require("../models/Subscriber");
 
 // 데이터베이스 연결 설정
-mongoose.connect("mongodb://127.0.0.1:27017/ut-nodejs", {
-  useNewUrlParser: true,
+mongoose.connect(
+  "mongodb://127.0.0.1:27017/ut-nodejs" //Atils 경로
+);
+const db = mongoose.connection;
+db.once("open", () => {
+  console.log("Connedted DB");
 });
 
 mongoose.connection;
@@ -20,7 +24,7 @@ var subscribers = [
     email: "yjs@running.com",
     phoneNumber: "",
     newsletter: true,
-    courses: ['nodejs101', 'htmlcssjs101', 'python101', 'aiml101', 'react101'],
+    courses: ["nodejs101", "htmlcssjs101", "python101", "aiml101", "react101"],
     profileImg:
       "https://newsimg-hams.hankookilbo.com/2022/01/21/f96adb47-e8b1-43fe-aa16-f2043012cbec.jpg",
   },
@@ -150,4 +154,4 @@ setTimeout(() => {
     .catch((error) => {
       console.log(`Error: ${error}`);
     });
-}, 500);
+}, 1500);
